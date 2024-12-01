@@ -228,6 +228,10 @@ def start_face_recognition():
 
 # Register the face with the selected images
 def register_face_with_images():
+    warning = messagebox.askyesno("WARNING", "Using image files may lead to a VERY HIGH false positive rate. [Not Advised, if the other method is possible] Do you want to proceed?")
+    if not warning:
+        return
+    
     file_paths = filedialog.askopenfilenames(
         title="Select Images", 
         filetypes=[("Image Files", "*.jpg *.jpeg *.png")]
