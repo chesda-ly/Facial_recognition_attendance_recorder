@@ -162,6 +162,12 @@ def validate_inputs(Id, Name, age):
     
     return True
 
+def train_recognizer():
+    ids, faces = get_image_with_id('dataset')
+    recognizer.train(faces, ids)
+    recognizer.save('recognizer/trainingdata.yml')
+    messagebox.showinfo("Success", "Recognizer trained successfully.")
+
 # Start the face recognition process
 def start_face_recognition():
     cam = cv2.VideoCapture(0)
@@ -218,10 +224,9 @@ def start_face_recognition():
     cv2.destroyAllWindows()
 
     # Train the recognizer with the new images
-    ids, faces = get_image_with_id('dataset')
-    recognizer.train(faces, ids)
-    recognizer.save('recognizer/trainingdata.yml')
     messagebox.showinfo("Success", "Face registered successfully.")
+    train_recognizer()
+    
     id_entry.delete(0, tk.END)
     name_entry.delete(0, tk.END)
     age_entry.delete(0, tk.END)
@@ -259,7 +264,7 @@ def register_face_with_images():
             sample_num += 1
             cv2.imwrite(f"dataset/{Name}.{Id}.{sample_num}.jpg", gray[y:y + h, x:x + w])
             
-        if sample_num >= 21:
+        if sample_num >= 50:
             break
 
     if sample_num == 0:
@@ -267,10 +272,12 @@ def register_face_with_images():
         
     else:
         # Train the recognizer with the new images
-        ids, faces = get_image_with_id('dataset')
-        recognizer.train(faces, ids)
-        recognizer.save('recognizer/trainingdata.yml')
+        train_recognizer()
         messagebox.showinfo("Success", "Faces registered successfully.")
+        
+    id_entry.delete(0, tk.END)
+    name_entry.delete(0, tk.END)
+    age_entry.delete(0, tk.END)
 
 # Record the attendance of a student
 def record_attendance(id, name):
