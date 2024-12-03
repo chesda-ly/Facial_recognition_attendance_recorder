@@ -2,7 +2,6 @@ import glob
 import hashlib
 import os
 import re
-import shutil
 import sqlite3
 import time
 import tkinter as tk
@@ -389,11 +388,6 @@ def reset_databases():
         files = glob.glob('dataset/*')
         for f in files:
             os.remove(f)
-         
-        # Delete all images subfolders from the picture_database folder   
-        files = glob.glob('picture_database/*')
-        for f in files:
-            shutil.rmtree(f)
 
         conn = sqlite3.connect('attendance.db')
         cursor = conn.cursor()
