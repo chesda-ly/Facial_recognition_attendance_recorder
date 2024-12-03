@@ -208,6 +208,7 @@ def start_face_recognition():
                 sample_num += 1
                 cv2.imwrite(f"dataset/{Name}.{Id}.{sample_num}.jpg", gray[y:y + h, x:x + w])
                 cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                cv2.putText(img, "REGISTERING...", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                 cv2.waitKey(100)
 
         cv2.imshow("Registering Face", img)
@@ -334,13 +335,13 @@ def face_recognition_loop():
                         else:
                             status = 'Present'
                     # Display the student's ID, name, age, and status
-                    cv2.putText(img, f"ID: {profile[0]}", (x, y - 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 127), 2)
-                    cv2.putText(img, f"Name: {profile[1]}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 127), 2)
-                    cv2.putText(img, f"Age: {profile[2]}", (x, y + h + 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 127), 2)
+                    cv2.putText(img, f"ID: {profile[0]}", (x, y - 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+                    cv2.putText(img, f"Name: {profile[1]}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+                    cv2.putText(img, f"Age: {profile[2]}", (x, y + h + 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
                     cv2.putText(img, f"Status: {status}", (x, y + h + 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2)
                 else:
-                    cv2.putText(img, "Face not recognized", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-                cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                    cv2.putText(img, "Face not recognized", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+                cv2.rectangle(img, (x, y), (x + w, y + h), (255, 255, 255), 2)
             cv2.imshow("Face Recognition", img)
             if cv2.waitKey(10) == ord('q'):
                 break
