@@ -11,6 +11,9 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()
 path = 'dataset'
 processed_dir_path = 'picture_database'
 
+os.makedirs(path, exist_ok=True)
+os.makedirs(processed_dir_path, exist_ok=True)
+
 # Function to get images with their IDs
 def get_image_with_id(path):
     # Create the directory if it doesn't exist
